@@ -1,0 +1,15 @@
+# tasks file for debian-12-apache-mod-php
+---
+- name: apache | conf | disable
+  ansible.builtin.command: a2disconf {{ item }}
+  args:
+    removes: "/etc/apache2/conf-enabled/{{ item }}.conf"
+  with_items: "{{ debian_12_apache_mod_php_apache_conf_disabled }}"
+  notify: restart apache2
+
+- name: apache | conf | enable
+  ansible.builtin.command: a2enconf {{ item }}
+  args:
+    creates: "/etc/apache2/conf-enabled/{{ item }}.conf"
+  with_items: "{{ debian_12_apache_mod_php_apache_conf_enabled }}"
+  notify: restart apache2

@@ -1,0 +1,67 @@
+# defaults file for debian-12-apache-mod-php
+---
+debian_12_apache_mod_php_apache_install:
+  - apachetop
+
+debian_12_apache_mod_php_apache_listen:
+  - 80
+
+debian_12_apache_mod_php_apache_conf_enabled:
+  - security
+
+debian_12_apache_mod_php_apache_conf_disabled: []
+
+debian_12_apache_mod_php_apache_server_tokens: Prod
+debian_12_apache_mod_php_apache_server_signature: 'Off'
+debian_12_apache_mod_php_apache_trace_enable: 'Off'
+
+debian_12_apache_mod_php_apache_hidden_directories_pattern: '/\.'
+debian_12_apache_mod_php_apache_hidden_files_pattern: '^\.'
+
+debian_12_apache_mod_php_apache_mods_dependencies:
+  mpm_itk:
+    - libapache2-mpm-itk
+  php8.2:
+    - libapache2-mod-php
+    - php
+    - php-common
+
+debian_12_apache_mod_php_apache_mods_present:
+  - mpm_prefork
+  - rewrite
+  - headers
+  - expires
+  - deflate
+  - status
+  - php8.2
+
+debian_12_apache_mod_php_apache_mods_absent:
+  - mpm_worker
+  - mpm_event
+
+debian_12_apache_mod_php_apache_prefork_start_servers: 5
+debian_12_apache_mod_php_apache_prefork_min_spare_servers: 5
+debian_12_apache_mod_php_apache_prefork_max_spare_servers: 10
+debian_12_apache_mod_php_apache_prefork_server_limit: 256
+debian_12_apache_mod_php_apache_prefork_max_request_workers: 150
+debian_12_apache_mod_php_apache_prefork_max_connections_per_child: 0
+
+debian_12_apache_mod_php_apache_vhosts_absent:
+  - name: 000-default.conf
+
+debian_12_apache_mod_php_php_mods_enabled_defaults:
+  - opcache
+  - json
+  - xml
+  - mysqli
+  - memcache
+  - memcached
+  - msgpack
+  - mbstring
+  - gd
+  - curl
+  - intl
+
+debian_12_apache_mod_php_php_mods_enabled: "{{ debian_12_apache_mod_php_php_mods_enabled_defaults }}"
+
+debian_12_apache_mod_php_php_mods_disabled: []

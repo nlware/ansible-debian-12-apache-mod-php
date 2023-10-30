@@ -1,0 +1,11 @@
+# tasks file for debian-12-apache-mod-php
+---
+- name: install | dependencies
+  ansible.builtin.apt:
+    name: "{{ item }}"
+  with_items: "{{ debian_12_apache_mod_php_apache_dependencies }}"
+
+- name: install | additional
+  ansible.builtin.apt:
+    name: "{{ item }}"
+  with_items: "{{ debian_12_apache_mod_php_apache_install }}"
