@@ -1,0 +1,15 @@
+# tasks file for debian-12-apache-mod-php
+---
+- name: apache | mods | disable
+  ansible.builtin.command: a2dismod -f {{ item }}
+  args:
+    removes: "/etc/apache2/mods-enabled/{{ item }}.load"
+  with_items: "{{ debian_12_apache_mod_php_apache_mods_absent }}"
+  notify: restart apache2
+
+- name: apache | mods | enable
+  ansible.builtin.command: a2enmod {{ item }}
+  args:
+    creates: "/etc/apache2/mods-enabled/{{ item }}.load"
+  with_items: "{{ debian_12_apache_mod_php_apache_mods_present }}"
+  notify: restart apache2

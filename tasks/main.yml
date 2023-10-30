@@ -1,0 +1,46 @@
+# tasks file for debian-12-apache-mod-php
+---
+
+- name: apache install
+  ansible.builtin.import_tasks: apache-install.yml
+
+- name: apache configuration
+  ansible.builtin.import_tasks: apache-configuration.yml
+
+- name: apache conf security
+  ansible.builtin.import_tasks: apache-conf-security.yml
+
+- name: apache conf state
+  ansible.builtin.import_tasks: apache-conf-state.yml
+
+- name: apache mods install
+  ansible.builtin.import_tasks: apache-mods-install.yml
+
+- name: apache mods prefork
+  ansible.builtin.import_tasks: apache-mods-prefork.yml
+
+- name: apache mods remoteip
+  ansible.builtin.import_tasks: apache-mods-remoteip.yml
+
+- name: apache mods state
+  ansible.builtin.import_tasks: apache-mods-state.yml
+
+- name: apache vhosts
+  ansible.builtin.import_tasks: apache-vhosts.yml
+
+- name: apache vhosts state
+  ansible.builtin.import_tasks: apache-vhosts-state.yml
+
+- name: apache vhosts cleanup
+  ansible.builtin.import_tasks: apache-vhosts-cleanup.yml
+
+- name: php mods install
+  ansible.builtin.import_tasks: php-mods-install.yml
+
+- name: php mods state
+  ansible.builtin.import_tasks: php-mods-state.yml
+
+- name: start and enable service
+  ansible.builtin.service:
+    name: apache2
+    state: started
